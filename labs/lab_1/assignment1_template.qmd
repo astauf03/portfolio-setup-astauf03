@@ -1,14 +1,14 @@
 ---
 title: "Assignment 1: Census Data Quality for Policy Decisions"
 subtitle: "Evaluating Data Reliability for Algorithmic Decision-Making"
-author: "Your Name Here"
+author: "Alex Stauffer"
 date: today
 format: 
   html:
     code-fold: false
     toc: true
     toc-location: left
-    theme: cosmo
+    theme: flatly
 execute:
   warning: false
   message: false
@@ -18,7 +18,7 @@ execute:
 
 ## Scenario
 
-You are a data analyst for the **[Your State] Department of Human Services**. The department is considering implementing an algorithmic system to identify communities that should receive priority for social service funding and outreach programs. Your supervisor has asked you to evaluate the quality and reliability of available census data to inform this decision.
+You are a data analyst for the **Georgia Department of Human Services**. The department is considering implementing an algorithmic system to identify communities that should receive priority for social service funding and outreach programs. Your supervisor has asked you to evaluate the quality and reliability of available census data to inform this decision.
 
 Drawing on our Week 2 discussion of algorithmic bias, you need to assess not just what the data shows, but how reliable it is and what communities might be affected by data quality issues.
 
@@ -46,19 +46,24 @@ Create this assignment in your portfolio repository under an `assignments/assign
     - href: assignments/assignment_1/your_file_name.qmd
       text: "Assignment 1: Census Data Exploration"
 ```
-If there is a special character like comma, you need use double quote mark so that the quarto can identify this as text
+If there is a special character like comma, you need use double quote mark so that the quarto can identify this as text. 
+
+**I decide to pair assignments with labs.** 
 
 # Setup
 
 ```{r setup}
 # Load required packages (hint: you need tidycensus, tidyverse, and knitr)
-
+library(tidyverse)
+library(tidycensus)
+library(knitr)
 # Set your Census API key
-
+census_api_key(Sys.getenv("MY_CENSUS_API_KEY"))
 # Choose your state for analysis - assign it to a variable called my_state
+my_state <- "GA"
 ```
 
-**State Selection:** I have chosen **[Your State Name]** for this analysis because: [Brief explanation of why you chose this state]
+**State Selection:** I have chosen **Georgia** for this analysis for no reason other than curiosity. If I think too hard about it, I will be here all day. 
 
 # Part 2: County-Level Resource Assessment
 
@@ -77,11 +82,26 @@ If there is a special character like comma, you need use double quote mark so th
 
 ```{r county-data}
 # Write your get_acs() code here
-
+ga_county_data <- get_acs(
+  geography = "county",
+  variables = c(
+    medhhinc = "B19013_001",# Median household income"
+    total_pop = "B01003_001" # Total population 
+  ),
+  year = 2022,
+  state = my_state,
+  survey = "acs5",
+  output = "wide"
+)
 # Clean the county names to remove state name and "County" 
 # Hint: use mutate() with str_remove()
+remove <- c("County", "Georgia", ', ', ' ')
+pattern <- paste0("\\b(", paste(remove, collapse = "|"), ")\\b")
 
+ga_county_data <- ga_county_data %>%
+  mutate(county_name = str_remove_all(NAME, pattern))
 # Display the first few rows
+glimpse(ga_county_data)
 ```
 
 ## 2.2 Data Quality Assessment
