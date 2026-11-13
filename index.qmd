@@ -1,0 +1,23 @@
+---
+title: "MUSA 5080 Portfolio"
+---
+
+# Welcome to My Portfolio
+
+This portfolio documents my learning journey in Public Policy Analytics (MUSA 5080).
+
+## About This Course
+Advanced spatial analysis and data science for urban planning and public policy.
+
+## Portfolio Structure
+- **Weekly Notes:** My learning reflections and key concepts throughout the course.
+- **Assignments:** Major assignments and two group projects.
+  - Projects include a midterm and final capstone project.
+- **Labs:** In class assignments and explorations (limited).
+
+## About Me
+I transitioned from social sciences to geospatial sciences to tell the stories of people who are effected by policy and real-world decision-making. My goal for this class is to learn to undersatnd policy analysis, and how I can connect real people's stories to the data I have collected and visualized. 
+
+## Contact
+- Email: astauf03@gmail.com
+- GitHub: @astauf03
