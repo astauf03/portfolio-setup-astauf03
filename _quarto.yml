@@ -8,7 +8,7 @@ project:
     - "!syllabus/"
 
 website:
-  title: "title"
+  title: "Alex Stauffer's Public Policy Analytics Portfolio"
   navbar:
     left:
       - href: index.qmd
@@ -21,7 +21,7 @@ website:
 
 format:
   html:
-    theme: cosmo
+    theme: flatly
     toc: true
     code-fold: true
 
